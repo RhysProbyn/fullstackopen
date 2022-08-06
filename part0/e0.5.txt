@@ -1,3 +1,6 @@
+# solution for e0.5
+# similar process to opening page https://studies.cs.helsinki.fi/exampleapp/notes
+
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
 server-->browser: HTML-code
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
