@@ -7,7 +7,12 @@ User writes new note in text
 field and clicks "submit"
 end note
 browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
-server-->browser: HTTP status code 302
+
+note over server:
+Server adds new note to
+a json file calle data.json
+end note
+server-->browser: HTTP status code 302 (redirect: tells browser to reload page)
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 server-->browser: HTML code
 note over browser:
