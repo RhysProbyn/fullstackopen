@@ -1,0 +1,16 @@
+# Solution for exercise 0.6
+# code for https://www.websequencediagrams.com/
+# 
+
+note over browser:
+User writes new note in text 
+field and clicks "submit"
+end note
+note over browser:
+JS event handler reads text field  
+and adds new note to notes list,
+rerenders the page and sends the
+new note to the server
+end note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+end note

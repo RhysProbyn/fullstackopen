@@ -1,4 +1,4 @@
-# Solution for part0 exercise 0.4
+# Solution for exercise 0.4
 # code for https://www.websequencediagrams.com/
 # 
 
