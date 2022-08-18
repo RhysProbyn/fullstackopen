@@ -22,7 +22,7 @@ const Statistics = (props) => {
     return (
       <div>
         <h1>statistics</h1>
-        <table>
+        <table style={{ textAlign: "left" }}>
           <tbody>
             <StatisticLine text="good" value={good} />
             <StatisticLine text="neutral" value={neutral} />
@@ -30,11 +30,17 @@ const Statistics = (props) => {
             <StatisticLine text="all" value={totalFeedback} />
             <StatisticLine
               text="average"
-              value={(good - bad) / totalFeedback}
+              value={(
+                Math.round(((good - bad) / totalFeedback) * 100) * 0.01
+              ).toFixed(2)}
             />
             <StatisticLine
               text="positive"
-              value={(good / totalFeedback) * 100 + " %"}
+              value={
+                (Math.round((good / totalFeedback) * 100 * 10) * 0.1).toFixed(
+                  1
+                ) + " %"
+              }
             />
           </tbody>
         </table>
