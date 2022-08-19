@@ -24,8 +24,6 @@ const App = () => {
     const newVotes = [...votes];
     newVotes[selected] += 1;
     setVotes(newVotes);
-    console.log(Math.max(votes));
-    console.log(votes);
   };
 
   return (
