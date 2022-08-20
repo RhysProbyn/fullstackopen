@@ -1,13 +1,13 @@
 // Header component
-const Header = (props) => {
-  return <h1>{props.headerText}</h1>;
+const Header = ({ headerText }) => {
+  return <h1>{headerText}</h1>;
 };
 
 // Content component: takes array of part objects
-const Content = (props) => {
+const Content = ({ parts }) => {
   return (
     <div>
-      {props.parts.map((part) => (
+      {parts.map((part) => (
         <Part name={part.name} numberOfExercises={part.exercises} />
       ))}
     </div>
@@ -15,18 +15,18 @@ const Content = (props) => {
 };
 
 // Part component
-const Part = (props) => {
+const Part = ({ name, numberOfExercises }) => {
   return (
     <p>
-      {props.name} {props.numberOfExercises}
+      {name} {numberOfExercises}
     </p>
   );
 };
 
 // Total component: takes array of part objects
-const Total = (props) => {
+const Total = ({ parts }) => {
   let sum = 0;
-  props.parts.forEach((part) => {
+  parts.forEach((part) => {
     sum += part.exercises;
   });
   return <p>Number of exercises {sum}</p>;
