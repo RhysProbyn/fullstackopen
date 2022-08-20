@@ -8,7 +8,11 @@ const Content = ({ parts }) => {
   return (
     <div>
       {parts.map((part) => (
-        <Part name={part.name} numberOfExercises={part.exercises} />
+        <Part
+          key={part.id}
+          name={part.name}
+          numberOfExercises={part.exercises}
+        />
       ))}
     </div>
   );
