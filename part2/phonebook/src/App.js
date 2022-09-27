@@ -1,6 +1,39 @@
 import { useState } from "react";
 import Person from "./components/Person";
 
+const Filter = (props) => {
+  return (
+    <div>
+      filter names shown with:
+      <input value={props.filterString} onChange={props.onChange} />
+    </div>
+  );
+};
+const PersonForm = (props) => {
+  return (
+    <form onSubmit={props.onSubmit}>
+      <div>
+        name: <input value={props.nameValue} onChange={props.nameOnChange} />
+      </div>
+      <div>
+        number:{" "}
+        <input value={props.numberValue} onChange={props.numberOnChange} />
+      </div>
+      <div>
+        <button type="submit">add</button>
+      </div>
+    </form>
+  );
+};
+const Persons = ({ persons }) => {
+  return (
+    <ul>
+      {persons.map((person) => (
+        <Person key={person.name} name={person.name} number={person.number} />
+      ))}
+    </ul>
+  );
+};
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456", id: 1 },
@@ -49,31 +82,20 @@ const App = () => {
 
   return (
     <div>
-      <div>debug: {newName}</div>
       <h1>Phonebook</h1>
+      <Filter filterString={filterString} onChange={handleFilterChange} />
 
-      <div>
-        filter names shown with:
-        <input value={filterString} onChange={handleFilterChange} />
-      </div>
       <h2>add a new name</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm
+        onSubmit={addName}
+        nameValue={newName}
+        nameOnChange={handleNameChange}
+        numberValue={newNumber}
+        numberOnChange={handleNumberChange}
+      />
+
       <h2>Numbers</h2>
-      <ul>
-        {namesToShow.map((person) => (
-          <Person key={person.name} name={person.name} number={person.number} />
-        ))}
-      </ul>
+      <Persons persons={namesToShow} />
     </div>
   );
 };
