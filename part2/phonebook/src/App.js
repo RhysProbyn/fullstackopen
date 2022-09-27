@@ -1,5 +1,12 @@
 import { useState } from "react";
-import Person from "./components/Person";
+
+const Person = ({ name, number }) => {
+  return (
+    <li>
+      {name} {number}
+    </li>
+  );
+};
 
 const Filter = (props) => {
   return (
@@ -9,6 +16,7 @@ const Filter = (props) => {
     </div>
   );
 };
+
 const PersonForm = (props) => {
   return (
     <form onSubmit={props.onSubmit}>
@@ -25,6 +33,7 @@ const PersonForm = (props) => {
     </form>
   );
 };
+
 const Persons = ({ persons }) => {
   return (
     <ul>
@@ -34,6 +43,7 @@ const Persons = ({ persons }) => {
     </ul>
   );
 };
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456", id: 1 },
