@@ -45,7 +45,11 @@ const CountryInfo = ({ country }) => {
           return <li key={lkey}>{country.languages[lkey]}</li>;
         })}
       </ul>
-      <img src={country.flags.svg} width="300" />
+      <img
+        src={country.flags.svg}
+        width="300"
+        style={{ filter: "drop-shadow(5px 5px 5px #666666)" }}
+      />
       <WeatherInfo country={country} />
     </div>
   );
@@ -61,9 +65,9 @@ const Filter = (props) => {
 
 const WeatherInfo = ({ country }) => {
   const [latitude, longitude] = country.capitalInfo.latlng;
-  const [temperature, setTemperature] = useState(0);
-  const [weatherIcon, setWeatherIcon] = useState(0);
-  const [weatherDesc, setweatherDesc] = useState(0);
+  const [temperature, setTemperature] = useState("loading...");
+  const [weatherIcon, setWeatherIcon] = useState("01d");
+  const [weatherDesc, setweatherDesc] = useState("");
   useEffect(() => {
     console.log("use effect: get weather");
     console.log(api_key);
@@ -88,7 +92,10 @@ const WeatherInfo = ({ country }) => {
       <h2>Weather in {country.capital}</h2>
       <p>Temperature: {temperature} °C</p>
       <figure>
-        <img src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} />
+        <img
+          src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+          style={{ filter: "drop-shadow(5px 5px 5px #666666)" }}
+        />
         <figcaption>{weatherDesc}</figcaption>
       </figure>
     </div>
