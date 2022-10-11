@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+const api_key = process.env.REACT_APP_API_KEY;
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
@@ -45,6 +46,7 @@ const CountryInfo = ({ country }) => {
         })}
       </ul>
       <img src={country.flags.svg} width="300" />
+      <WeatherInfo country={country} />
     </div>
   );
 };
@@ -56,16 +58,53 @@ const Filter = (props) => {
     </div>
   );
 };
+
+const WeatherInfo = ({ country }) => {
+  const [latitude, longitude] = country.capitalInfo.latlng;
+  const [temperature, setTemperature] = useState(0);
+  const [weatherIcon, setWeatherIcon] = useState(0);
+  const [weatherDesc, setweatherDesc] = useState(0);
+  useEffect(() => {
+    console.log("use effect: get weather");
+    console.log(api_key);
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}`
+      )
+      .then((response) => {
+        console.log("weather promise fulfilled");
+        // setWeather(response.data);
+        console.log("weather", response);
+        console.log("temp", response.data.main.temp);
+        setTemperature(
+          Math.round((response.data.main.temp - 273.15) * 10) / 10
+        );
+        setWeatherIcon(response.data.weather[0]["icon"]);
+        setweatherDesc(response.data.weather[0]["description"]);
+      });
+  }, []);
+  return (
+    <div>
+      <h2>Weather in {country.capital}</h2>
+      <p>Temperature: {temperature} °C</p>
+      <figure>
+        <img src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} />
+        <figcaption>{weatherDesc}</figcaption>
+      </figure>
+    </div>
+  );
+};
 const CountryInput = () => {};
 const App = () => {
   const [countriesToShow, setCountriesToShow] = useState([]);
   const [allCountries, setAllCountries] = useState([]);
   const [filterString, setFilterString] = useState("");
   useEffect(() => {
-    console.log("use effect");
+    console.log("use effect: get countries");
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
-      console.log("promise fulfilled");
+      console.log("country promise fulfilled");
       setAllCountries(response.data);
+      console.log("countries", response);
     });
   }, []);
   const handleFilterChange = (event) => {
@@ -79,6 +118,8 @@ const App = () => {
       })
     );
   };
+  if (countriesToShow.length === 1) {
+  }
   return (
     <>
       <Filter onChange={handleFilterChange} />
